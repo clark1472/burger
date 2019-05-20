@@ -1,6 +1,7 @@
 // Import the ORM to create functions that will interact with the database.
-var orm = require("../config/orm.js");
+var orm = require("../config/orm");
 
+//export burger, callback all our orm's
 var burger = {
     all: function(cb) {
       orm.all("burgers", function(res) {
@@ -8,40 +9,21 @@ var burger = {
       });
     },
     // The variables cols and vals are arrays.
-    create: function(cols, vals, cb) {
-      orm.create("burgers", cols, vals, function(res) {
+    createOne: function(cols, vals, cb) {
+      orm.all("burgers", cols, vals, function(res) {
         cb(res);
       });
     },
-    update: function(objColVals, condition, cb) {
-      orm.update("burgers", objColVals, condition, function(res) {
+    updateOne: function(objColVals, condition, cb) {
+      orm.all("burgers", objColVals, condition, function(res) {
         cb(res);
       });
-    }
-  };
-  $(".delete-burger").on("click"), function(event) {
-    var id = $(this).data("id");
-  
-    //Send the DELETE request.
-    $.ajax("api/burgers/" + id, {
-      type: "DELETE"
-    }).then
-      function() {
-        console.log("deleted burger", id);
-        //Reload the page to get the updated list
-        location.reload();
-      };
-    update: function(objColVals, condition, callback) {
-      orm.update("burgers",objColVals, condition, function(res) {
-        callback(res);
+    },
+    deleteOne: function(condition, cb) {
+      orm.all("burgers", condition, function(res) {
+        cb(res);
       });
-    };
-  
-    delete: functions(condition, callback) {
-      orm.delete("burgers", condition, function(res) {
-        callback(res);
-      });
-    }
+    },
   };
   
   // Export the database functions for the controller (burgers_controller.js).
