@@ -1,23 +1,40 @@
 <div class="container">
 
   <div class="jumbotron">
-    <h1>Eat-Da-Burgers!</h1>
+    <h1 class="display-4">Eat-Da-Burgers!</h1>
     <h2>Add a burger</h2>
       <form class="create-form">
 
         <div class="form-group">
           <label for="createBurger">Burger Name:</label>
           <input type="text" id="createBurger" name="burger">
-          <button type="submit" class="btn btn-danger" id="nameBurger"></button>
+          <button type="button" class="btn btn-primary" id="nameBurger">Submit</button>
         </div>
+  </div> {{!-- this is the div for closing jumbotron --}}
 
       </form>
         <div>
           <h3>Enter a burger you want to eat Click the "Submit" button.</h3>
         </div>  {{!-- this is the div for closing h3 submit text --}}
+  <div class = "row">
+    <div class = "col-sm-6">
+      <div class = "panel">
+        <div class = "panel-heading" id="leftside">Order the Burger</div>
+        <div class = "panel-body">
+          <h3>add your order here</h3>
+        </div>
+      </div>
+    </div>
+    <div class = "col-sm-6">
+      <div class = "panel">
+        <div class = "panel-heading" id="rightside">Devour the Burger</div>
+        <div class = "panel-body">
+          <h3></h3>
+        </div>
+      </div>
+    </div>
 
-
-  </div> {{!-- this is the div for closing jumbotron --}}
+  </div>   {{!--this is the div for closing end of row --}}
 </div> {{!-- this is the div for closing container --}}
 
 
