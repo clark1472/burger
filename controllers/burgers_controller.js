@@ -47,7 +47,7 @@ router.get("/", function(req, res) {
     console.log("condition", req.params.id);
 
     burger.destroy(req.params.id, function(result) {
-      if (result.changedRows == 0) {
+      if ((result.changedRows == 0)) {
         //If no rows were changed, then the ID must not exist, so nothing happened
         return res.status(404).end();
       } else {

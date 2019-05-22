@@ -1,0 +1,322 @@
+index.handlebars
+<ol>
+  {{#each burgers}}
+  	<li>
+  	   <p>Name: {{this.burger_name}}</p>
+    </li>
+  {{/each}}
+</ol> 
+
+
+<div class="form-group">
+    <label for="devour">Devour It</label><br>
+    <input type="checkbox" name="devour" value="1" checked> Eaten!<br>
+    <input type="checkbox" name="devour" value="0"> Not Eaten
+  </div> 
+
+  <form id="createBurger" class="button-size">
+  <textarea type="text" name="burger"></textarea>
+  <button type="submit">Save Burger!</button>
+
+
+
+//========================== may need=============================
+server.js
+
+
+
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+
+  console.log("connected as id " + connection.threadId);
+});
+
+app.get("/", function(req, res) {
+    connection.query("SELECT * FROM burgers;", function(err, data) {
+      if (err) {
+        return res.status(500).end();
+      }
+      res.render("index", { burgers: data });
+    });
+  });
+
+  app.post("/api/burgers", function(req, res) {
+      console.log("your htting this funciton in api/burgers")
+    connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.burger], function(err, result) {
+      if (err) {
+        return res.status(500).end();
+      }
+  
+      // Send back the ID of the new burger
+      res.json({ id: result.insertId });
+      console.log({ id: result.insertId });
+    });
+  });
+
+  // Update a burger
+app.put("/api/burgers/:id", function(req, res) {
+    connection.query("UPDATE burgers SET burger = ? WHERE id = ?", [req.body.burger, req.params.id], function(err, result) {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+      else if (result.changedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+  
+    });
+  });
+
+  // Delete a burger
+app.delete("/api/burgers/:id", function(req, res) {
+    connection.query("DELETE FROM burgers WHERE id = ?", [req.params.id], function(err, result) {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+      else if (result.affectedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+  
+    });
+  });
+
+=============================================================
+ orm.js
+
+insertOne is my create
+
+his createQmarks is my printQuestionMarks
+
+=====may need============================
+// Helper function for SQL syntax.
+// Let's say we want to pass 3 values into the mySQL query.
+// In order to write the query, we need 3 question marks.
+// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
+// ["?", "?", "?"].toString() => "?,?,?";
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
+// Helper function to convert object key/value pairs to SQL syntax
+function objToSql(ob) {
+  var arr = [];
+
+  // loop through the keys and push the key/value as a string int arr
+  for (var key in ob) {
+    var value = ob[key];
+    // check to skip hidden properties
+    if (Object.hasOwnProperty.call(ob, key)) {
+      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
+      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
+      // e.g. {sleepy: true} => ["sleepy=true"]
+      arr.push(key + "=" + value);
+    }
+  }
+
+  // translate array of strings to a single comma-separated string
+  return arr.toString();
+}
+
+
+======may not need======
+ // An example of objColVals would be {name: panther, sleepy: true}
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
+
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      cb(result);
+    });
+  }
+
+insertOne is my createOne
+updateOne same
+deleteOne same
+
+his createQmarks is my printQuestionMarks
+
+=====need to make =====
+
+printQuestionMarks
+
+cols.toString
+
+translateSql
+
+==========================================================================
+burger.js
+things I removed.
+
+
+  $(".delete-burger").on("click"), function(event) {
+    var id = $(this).data("id");
+  
+    //Send the DELETE request.
+    $.ajax("api/burgers/" + id, {
+      type: "DELETE"
+    }).then
+      function() {
+        console.log("deleted burger", id);
+        //Reload the page to get the updated list
+        location.reload();
+      };
+    update: function(objColVals, condition, callback) {
+      orm.update("burgers",objColVals, condition, function(res) {
+        callback(res);
+      });
+    };
+  
+    delete: functions(condition, callback) {
+      orm.delete("burgers", condition, function(res) {
+        callback(res);
+      });
+    }
+  };
+
+=============================WAS on index.handlebars now on burger.js under assets
+<script>
+
+  $(function () {
+    $("#createBurger").on("submit", function (event) {
+      alert("you clicked the button")
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+
+      // nameBurger will find an element with a "name" attribute equal to the string "burger"
+      var nameBurger = {
+        burger_name: $("#nameBurger").val().trim()devoured: 0
+      };
+    })
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: nameBurger
+    }).then(
+      function () {
+        console.log("created new burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+
+    $(".eatBurger").on("click", function (event) {
+      event.preventDefault();
+
+      //change devoured to true
+      var id = $(this).data("id");
+      var devouredNow = {
+        devoured: 1
+      };
+
+      // Reload the page to get the updated list
+      $.ajax("/api/burgers", {
+        type: "PUT",
+        data: devouredNow
+      }).then(
+        function () {
+          console.log("Burger is devoured");
+          location.reload();
+        });
+    });
+
+    $(".deleteBurger").on("click", function (event) {
+      event.preventDefault();
+
+      //change devoured to delete
+      var id = $(this).data("id");
+      
+      // Reload the page to delete burger
+      $.ajax({
+        type: "DELETE",
+        url: "/api/burgers/" + id
+      }).then(location.reload());
+    });
+
+  });  //ends function
+
+</script>
+
+==============deleted burger.js in js folder under assets=========================
+
+$(function () {
+    $("#createBurger").on("submit", function (event) {
+      alert("you clicked the button")
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+
+      // nameBurger will find an element with a "name" attribute equal to the string "burger"
+      var nameBurger = {
+        burger_name: $("#nameBurger").val().trim(),
+        devoured: 0
+      };
+    })
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: nameBurger
+    }).then(
+      function () {
+        console.log("created new burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+
+    $(".eatBurger").on("click", function (event) {
+      event.preventDefault();
+
+      //change devoured to true
+      var id = $(this).data("id");
+      var devouredNow = {
+        devoured: 1
+      };
+
+      // Reload the page to get the updated list
+      $.ajax("/api/burgers", {
+        type: "PUT",
+        data: devouredNow
+      }).then(
+        function () {
+          console.log("Burger is devoured");
+          location.reload();
+        });
+    });
+
+    $(".deleteBurger").on("click", function (event) {
+      event.preventDefault();
+
+      //change devoured to delete
+      var id = $(this).data("id");
+      
+      // Reload the page to delete burger
+      $.ajax({
+        type: "DELETE",
+        url: "/api/burgers/" + id
+      }).then(location.reload());
+    });
+
+  });  //ends function

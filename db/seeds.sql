@@ -1,4 +1,4 @@
 USE burger_db;
-INSERT INTO burgers (id, burger_name, devoured) values (1, "chicken bacon ranch", false);
-INSERT INTO burgers (id, burger_name, devoured) values (2, "hamburger cheese pickel", false);
-INSERT INTO burgers (id, burger_name, devoured) values (3, "turkey ham roastbeef lettuce tomato", false);
+INSERT INTO burgers (burger_name, devoured) VALUES (1, "chicken bacon ranch", FALSE);
+INSERT INTO burgers (burger_name, devoured) VALUES (2, "hamburger cheese pickel", FALSE);
+INSERT INTO burgers (burger_name, devoured) VALUES (3, "turkey ham roastbeef lettuce tomato", FALSE);
