@@ -1,39 +1,67 @@
 <div class="container">
 
   <div class="jumbotron">
+    <br>
     <h1 class="display-4">Eat-Da-Burgers!</h1>
+    <img src="/assets/img/burger_18.jpeg" class="solid" width="400px" id="burger_18">
+
     <h2>Add a burger</h2>
+    <panel>
       <form class="create-form">
-
         <div class="form-group">
-          <label for="createBurger">Burger Name:</label>
+          <label for="createBurger"><strong>Burger Name:</strong></label>
           <input type="text" id="createBurger" name="burger">
-          <button type="button" class="btn btn-primary" id="nameBurger">Submit</button>
+          <button type="submit" class="btn btn-primary" id="burger_name">Submit</button>
         </div>
-  </div> {{!-- this is the div for closing jumbotron --}}
-
       </form>
-        <div>
-          <h3>Enter a burger you want to eat Click the "Submit" button.</h3>
-        </div>  {{!-- this is the div for closing h3 submit text --}}
-  <div class = "row">
-    <div class = "col-sm-6">
-      <div class = "panel">
-        <div class = "panel-heading" id="leftside">Order the Burger</div>
-        <div class = "panel-body">
-          <h3>add your order here</h3>
+       <div>
+        <h3> Enter a burger you want to eat Click the "Submit" button.</h3>
+        <br>
+      </div> <!-- this is the div for closing h3 submit text -->
+    </panel>
+  </div> <!-- this is the div for closing jumbotron -->
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" id="leftside"><strong> Type of Burger</strong></div>
+        <div class="panel-body">
+          <ul>
+            {{#each burgers}}
+            {{#unless devoured}}
+
+            <h3>{{this.id}} - {{this.burger_name}}</h3>
+            <button type="button" class="eatburger btn btn-success" id="eatbutton" data-id="{{this.id}}"
+              data-devouredNow="{{devour}}">
+              <span class="fa fa-credit-card"></span>
+            </button>
+            <hr>
+            {{/unless}}
+            {{/each}}
+          </ul>
         </div>
       </div>
     </div>
-    <div class = "col-sm-6">
-      <div class = "panel">
-        <div class = "panel-heading" id="rightside">Devour the Burger</div>
-        <div class = "panel-body">
-          <h3></h3>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" id="rightside"><strong>Devour the Burger</strong></div>
+        <div class="panel-body">
+          <ul>
+            {{#each burgers}}
+            {{#if devoured}}
+
+            <h3>{{this.id}} - {{this.burger_name}}</h3>
+            <button type="button" class="destroy btn btn-danger" id="destroy" data-id="{{this.id}}"
+              data-devouredNow="{{devour}}">
+              <span class="fa fa-trash"></span>
+            </button>
+            <hr>
+            {{/if}}
+            {{/each}}
+          </ul>
         </div>
       </div>
     </div>
-
-  </div>   {{!--this is the div for closing end of row --}}
-</div> {{!-- this is the div for closing container --}}
-
+  </div>
+  <!--this is the div for closing end of row -->
+</div> <!-- this is the div for closing container -->

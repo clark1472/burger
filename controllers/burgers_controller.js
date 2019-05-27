@@ -20,7 +20,8 @@ router.get("/", function(req, res) {
         ["burger_name", "devoured"],
         [req.body.burger_name, req.body.devoured],
         function(result) {
-        res.json({ id: result.insertId })
+        console.log("adding burger");
+        res.json({ id: result.insertId });
         }
       )
     });

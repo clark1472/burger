@@ -11,7 +11,7 @@ function printQuestionMarks(number) {
 } //closes printQuestionMarks function.
 
 //helper that will convert a string into an sql readable query.
-function translateSql(object) {
+function translateSql(ob) {
   var array = [];
   for (var key in ob) {
     var value = ob[key];

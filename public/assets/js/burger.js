@@ -1,3 +1,4 @@
+  $(function() { 
     $("#createBurger").on("submit", function (event) {
       alert("you clicked the button")
       // Make sure to preventDefault on a submit event.
@@ -17,9 +18,8 @@
         console.log("created new burger");
         // Reload the page to get the updated list
         location.reload();
-      }
-    );
-    })
+      });
+    });
     $(".eatBurger").on("click", function (event) {
       event.preventDefault();
 
@@ -30,7 +30,7 @@
       };
 
       // Reload the page to get the updated list
-      $.ajax("/api/burgers", {
+      $.ajax("/api/burgers" + id, {
         type: "PUT",
         data: devouredNow
       }).then(
@@ -53,5 +53,5 @@
       }).then(location.reload());
     });
 
-  
+  }); 
 
