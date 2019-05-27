@@ -73,7 +73,7 @@ var orm = {
     }); 
   }, //closes updateOne statement
 
-  deleteOne: function (table, condition, cb) {
+  destroy: function (table, condition, cb) {
     var queryString = "DELETE FROM " + table + 
     " WHERE " + condition;
 
