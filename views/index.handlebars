@@ -1,6 +1,7 @@
+<div class="jumbotron jumbotron-fluid">
 <div class="container">
 
-  <div class="jumbotron">
+  <!-- <div class="jumbotron"> -->
     <br>
     <h1 class="display-4">Eat-Da-Burgers!</h1>
     <img src="/assets/img/burger_18.jpeg" class="solid" width="400px" id="burger_18">
@@ -20,7 +21,7 @@
       </div> <!-- this is the div for closing h3 submit text -->
     </panel>
   </div> <!-- this is the div for closing jumbotron -->
-
+</div>
   <div class="row">   <!--this is the div for opening of row -->
     <div class="col-sm-6">
       <div class="panel panel-default">
@@ -30,10 +31,10 @@
             {{#each burgers}}
             {{#unless devoured}}
 
-            <h3>{{this.id}} - {{this.burger_name}}</h3>
+            <h3>{{this.id}} - {{this.burger_name}}
             <button type="button" class="eatBurger btn btn-success" id="eatbutton" data-id="{{this.id}}"
               data-devouredNow="{{devour}}"><span class="fa fa-credit-card"></span>
-            </button>
+            </button></h3>
             <hr>
             {{/unless}}
             {{/each}}

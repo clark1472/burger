@@ -1,5 +1,5 @@
 .jumbotron {
-    width: 100%;
+   
     margin: auto;
     text-align: center;
     margin-top: 0;
@@ -14,12 +14,23 @@
     background-color: yellow;
     color: black;
     text-align: center;
-    margin-right: 0;
+    padding: 7px;
+    margin-right: -15px;
+    
 }
 
 #rightside {
     background-color: cyan;
     color: black;
     text-align: center;
-    margin-left: 0;
+    padding: 7px;
+    margin-left: -15px;
+}
+
+.eatBurger {
+    text-align: left;
+}
+
+ul {
+    padding: 20px;
 }
