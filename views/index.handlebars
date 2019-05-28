@@ -21,7 +21,7 @@
     </panel>
   </div> <!-- this is the div for closing jumbotron -->
 
-  <div class="row">
+  <div class="row">   <!--this is the div for opening of row -->
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-heading" id="leftside"><strong> Type of Burger</strong></div>
@@ -31,9 +31,8 @@
             {{#unless devoured}}
 
             <h3>{{this.id}} - {{this.burger_name}}</h3>
-            <button type="button" class="eatburger btn btn-success" id="eatbutton" data-id="{{this.id}}"
-              data-devouredNow="{{devour}}">
-              <span class="fa fa-credit-card"></span>
+            <button type="button" class="eatBurger btn btn-success" id="eatbutton" data-id="{{this.id}}"
+              data-devouredNow="{{devour}}"><span class="fa fa-credit-card"></span>
             </button>
             <hr>
             {{/unless}}
@@ -41,7 +40,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div>  <!--this is div class col-sm-6-leftside-->
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-heading" id="rightside"><strong>Devour the Burger</strong></div>
@@ -61,7 +60,6 @@
           </ul>
         </div>
       </div>
-    </div>
-  </div>
-  <!--this is the div for closing end of row -->
+    </div> <!--this is div class col-sm-6-rightside-->
+  </div>   <!--this is the div for closing end of row -->
 </div> <!-- this is the div for closing container -->
