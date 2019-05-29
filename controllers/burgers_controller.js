@@ -7,7 +7,7 @@ var router = express.Router();
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    burger.all(function(data) {
+    burger.selectAll(function(data) {
       var hbsObject = {
         burgers: data
       };
@@ -19,9 +19,9 @@ router.get("/", function(req, res) {
     burger.createOne(
         ["burger_name", "devoured"],
         [req.body.burger_name, req.body.devoured],
-        function(result) {
+        function(res) {
         console.log("adding burger");
-        res.json({ id: result.insertId });
+        res.json({ id: res.insertId });
         }
       )
     });
@@ -32,10 +32,9 @@ router.get("/", function(req, res) {
     console.log("condition", condition);
   
     burger.updateOne({
-      //devoured = true
-      devoured: req.body.devoured
-    }, condition, function(result) {
-      if (result.changedRows === 0) {
+       devoured: req.body.devoured
+    }, condition, function(res) {
+      if (res.changedRows === 0) {
         // If no rows were changed, then the ID must not exist, so 404
         return res.status(404).end();
       } else {
@@ -48,8 +47,8 @@ router.get("/", function(req, res) {
     //var condition = "id = " + req.params.id;
     console.log("condition", req.params.id);
 
-    burger.destroy(req.params.id, function(result) {
-      if ((result.changedRows == 0)) {
+    burger.delete(req.params.id, function(res) {
+      if ((res.changedRows == 0)) {
         //If no rows were changed, then the ID must not exist, so nothing happened
         return res.status(404).end();
       } else {

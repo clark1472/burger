@@ -11,7 +11,7 @@ var PORT = process.env.PORT || 8080;
 app.use(express.static("public"));
 
 // Parse request body as JSON
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //set up express-handlebars
@@ -20,9 +20,7 @@ app.set("view engine", "handlebars");
 
 //setting up routes
 var routes = require("./controllers/burgers_controller.js");
-app.use("/", routes);
-//app.use("/update", routes);
-//app.use("/create", routes);
+app.use(routes);
 
  // Start our server so that it can begin listening to client requests.
  app.listen(PORT, function() {

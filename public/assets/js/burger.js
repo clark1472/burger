@@ -1,18 +1,20 @@
-  $(function() { 
-    $("#createBurger").on("submit", function (event) {
-      alert("you clicked the button")
+ // ==== Use a function to make sure everything loads first =============
+$(function(){
+ // ========== create-form on index.handlebars line 11 =========
+     $(".create-form").on("sumbit", function (event) {
+      //alert("you clicked the button") this button works.
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
 
-      // nameBurger will find an element with a "name" attribute equal to the string "burger"
-      var nameBurger = {
-        burger_name: $("#nameBurger").val().trim(),
+      // createBurger will find an element with a "burger_name" attribute equal to the string "burger"
+      var createBurger = {
+        burger_name: $("#createBurger").val().trim(),
         devoured: 0
       };
     
     $.ajax("/api/burgers", {
       type: "POST",
-      data: nameBurger
+      data: createBurger
     }).then(
       function () {
         console.log("created new burger");
@@ -20,11 +22,15 @@
         location.reload();
       });
     });
-    $(".eatBurger").on("click", function (event) {
+
+     // ==== eatBurger on index.handlebars line 36 =======
+    $("#eatBurger").on("click", function (event) {
       event.preventDefault();
 
       //change devoured to true
       var id = $(this).data("id");
+
+      // devouredNow on index.handlebars line 37
       var devouredNow = {
         devoured: 1
       };
@@ -40,18 +46,26 @@
         });
     });
 
+    // == deleteBurger on index.handlebars line 55 ===
+
     $(".deleteBurger").on("click", function (event) {
       event.preventDefault();
 
       //change devoured to delete
       var id = $(this).data("id");
       
-      // Reload the page to delete burger
+      // Send message to delete burger
       $.ajax({
         type: "DELETE",
         url: "/api/burgers/" + id
-      }).then(location.reload());
-    });
+      }).then(function() {
+        console.log("delete id ", id);
+        location.reload();
+      });
+           
+     }
+  );
+});
 
-  }); 
+
 

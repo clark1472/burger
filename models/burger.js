@@ -3,24 +3,24 @@ var orm = require("../config/orm.js");
 
 //export burger, callback all our orm's
 var burger = {
-    all: function(cb) {
-      orm.all("burgers", function(res) {
+    selectAll: function(cb) {
+      orm.selectAll("burgers", function(res) {
         cb(res);
       });
     },
-    // The variables cols and vals are arrays.
+    // The variables columns and values are arrays.
     createOne: function(cols, vals, cb) {
       orm.createOne("burgers", cols, vals, function(res) {
         cb(res);
       });
     },
-    updateOne: function(objColVals, condition, cb) {
-      orm.updateOne("burgers", objColVals, condition, function(res) {
+    updateOne: function(objColumnValues, condition, cb) {
+      orm.updateOne("burgers", objColumnValues, condition, function(res) {
         cb(res);
       });
     },
-    delete: function(condition, cb) {
-      orm.delete("burgers", condition, function(res) {
+    deleteOne: function(condition, cb) {
+      orm.deleteOne("burgers", condition, function(res) {
         cb(res);
       });
     }

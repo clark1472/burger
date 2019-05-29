@@ -1,4 +1,4 @@
-// Set up MySQL connection.
+// Set up MySQL connection. orm.js 
 var mysql = require("mysql");
 
 if (process.env.JAWSDB_URL) {
@@ -13,9 +13,9 @@ if (process.env.JAWSDB_URL) {
   });
 };
 // Make connection.
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
+connection.connect(function(error) {
+  if (error) {
+    console.error("error connecting: " + error.stack);
     return;
   }
   console.log("connected as id " + connection.threadId);

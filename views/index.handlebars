@@ -1,7 +1,7 @@
-<div class="jumbotron jumbotron-fluid">
+{{!-- <div class="jumbotron jumbotron-fluid"></div> --}}
 <div class="container">
+  <div class="jumbotron jumbotron-fluid">
 
-  <!-- <div class="jumbotron"> -->
     <br>
     <h1 class="display-4">Eat-Da-Burgers!</h1>
     <img src="/assets/img/burger_18.jpeg" class="solid" width="400px" id="burger_18">
@@ -10,19 +10,24 @@
     <panel>
       <form class="create-form">
         <div class="form-group">
+          <!-- createBurger on burger.js lines 10 & 11 -->
           <label for="createBurger"><strong>Burger Name:</strong></label>
           <input type="text" id="createBurger" name="burger">
-          <button type="submit" class="btn btn-primary" id="burger_name">Submit</button>
+     
+          <button type="submit" class="btn btn-primary" id="addburger">
+            Submit
+          </button>
         </div>
       </form>
-       <div>
-        <h3> Enter a burger you want to eat Click the "Submit" button.</h3>
+      <div>
+        <h3> Enter a burger you want to order and Click the "Submit" button.</h3>
         <br>
       </div> <!-- this is the div for closing h3 submit text -->
     </panel>
   </div> <!-- this is the div for closing jumbotron -->
-</div>
-  <div class="row">   <!--this is the div for opening of row -->
+
+  <div class="row">
+    <!--this is the div for opening of row -->
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-heading" id="leftside"><strong> Type of Burger</strong></div>
@@ -30,18 +35,22 @@
           <ul>
             {{#each burgers}}
             {{#unless devoured}}
-
+            {{!-- this is working. List of burgers on bottom of page  --}}
             <h3>{{this.id}} - {{this.burger_name}}
-            <button type="button" class="eatBurger btn btn-success" id="eatbutton" data-id="{{this.id}}"
-              data-devouredNow="{{devour}}"><span class="fa fa-credit-card"></span>
-            </button></h3>
+              {{!-- this is not working. cannot add to burgers on bottom of page.
+        Button does not move burger listed to the devoured burger side.--}}
+              <button type="button" class="btn btn-success" id="eatBurger" data-id="{{this.id}}"
+                data-devouredNow="{{devour}}"><span class="fa fa-credit-card"></span>
+                {{!-- devouredNow on burger.js\js line 35--}}
+              </button></h3>
             <hr>
             {{/unless}}
             {{/each}}
           </ul>
         </div>
       </div>
-    </div>  <!--this is div class col-sm-6-leftside-->
+    </div>
+    <!--this is div class col-sm-6-leftside-->
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-heading" id="rightside"><strong>Devour the Burger</strong></div>
@@ -51,7 +60,7 @@
             {{#if devoured}}
 
             <h3>{{this.id}} - {{this.burger_name}}</h3>
-            <button type="button" class="destroy btn btn-danger" id="destroy" data-id="{{this.id}}"
+            <button type="button" class="deleteBurger btn btn-danger" id="delete" data-id="{{this.id}}"
               data-devouredNow="{{devour}}">
               <span class="fa fa-trash"></span>
             </button>
@@ -61,6 +70,8 @@
           </ul>
         </div>
       </div>
-    </div> <!--this is div class col-sm-6-rightside-->
-  </div>   <!--this is the div for closing end of row -->
-</div> <!-- this is the div for closing container -->
+    </div>
+    <!--this is div class col-sm-6-rightside-->
+  </div>
+  <!--this is the div for closing end of row -->
+</div> <!-- this is the div for closing content-->
