@@ -10,15 +10,19 @@ var burger = {
     },
     // The variables columns and values are arrays.
     createOne: function(cols, vals, cb) {
+      console.log("I'm here! In burger JS models");
       orm.createOne("burgers", cols, vals, function(res) {
+        console.log("Your response", res)
         cb(res);
       });
     },
+
     updateOne: function(objColumnValues, condition, cb) {
       orm.updateOne("burgers", objColumnValues, condition, function(res) {
         cb(res);
       });
     },
+    
     deleteOne: function(condition, cb) {
       orm.deleteOne("burgers", condition, function(res) {
         cb(res);

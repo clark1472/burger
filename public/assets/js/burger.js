@@ -1,7 +1,7 @@
  // ==== Use a function to make sure everything loads first =============
 $(function(){
  // ========== create-form on index.handlebars line 11 =========
-     $(".create-form").on("sumbit", function (event) {
+     $(".create-form").on("submit", function (event) {
       //alert("you clicked the button") this button works.
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
@@ -11,6 +11,8 @@ $(function(){
         burger_name: $("#createBurger").val().trim(),
         devoured: 0
       };
+
+      console.log("The burger", createBurger);
     
     $.ajax("/api/burgers", {
       type: "POST",
@@ -24,8 +26,10 @@ $(function(){
     });
 
      // ==== eatBurger on index.handlebars line 36 =======
-    $("#eatBurger").on("click", function (event) {
+    $(".eatBurger").on("click", function (event) {
       event.preventDefault();
+
+      console.log("Checking button", id)
 
       //change devoured to true
       var id = $(this).data("id");
@@ -36,7 +40,7 @@ $(function(){
       };
 
       // Reload the page to get the updated list
-      $.ajax("/api/burgers" + id, {
+      $.ajax("/api/burgers/" + id, {
         type: "PUT",
         data: devouredNow
       }).then(
@@ -53,7 +57,7 @@ $(function(){
 
       //change devoured to delete
       var id = $(this).data("id");
-      
+      console.log("Checking button", id)
       // Send message to delete burger
       $.ajax({
         type: "DELETE",

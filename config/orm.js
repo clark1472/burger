@@ -4,7 +4,7 @@ var connection = require("../config/connection");
 // turn questionMarks into array into string.
 function printQuestionMarks(number) {
   var array = [];
-  for(var i = 0; i, number; i++) {
+  for(var i = 0; i < number; i++) {
     array.push("?");
   }
   return array.toString();
@@ -50,22 +50,18 @@ var orm = {
 */
     createOne: function (table, cols, vals, cb) {
     var queryString = 
-    "INSERT INTO " + 
-    table + 
-    " (" + 
-    cols.toString() + 
-    ") " + 
+    "INSERT INTO " + table + " (" + cols.toString() + ") " + 
     "VALUES (" + 
     printQuestionMarks(vals.length) +  
     ") "; 
-
+    
     console.log(queryString);
+    console.log("I'm here in the ORM!");
 
     connection.query(queryString, vals, function (error, res) {
       if (error) {
         throw error;
       }
-
       cb(res);
     });
   },  //closes createOne function
@@ -76,7 +72,7 @@ var orm = {
     " WHERE " + condition;
 
     console.log(queryString);
-    connection.query(queryString, vals, function (error, res) {
+    connection.query(queryString, function (error, res) {
       if (error) {
         throw error;
       }
@@ -91,7 +87,7 @@ var orm = {
     " WHERE " + condition;
 
     console.log(queryString);
-    connection.query(queryString, vals, function (error, res) {
+    connection.query(queryString, function (error, res) {
       if (error) {
         throw error;
       }
